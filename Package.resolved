@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "TinyConstraints",
+        "repositoryURL": "https://github.com/roberthein/TinyConstraints.git",
+        "state": {
+          "branch": null,
+          "revision": "f413ea53b886de81b925eeb37a14538fe6ae4912",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "ViewDSL",
+        "repositoryURL": "https://github.com/muizidn/viewdsl.git",
+        "state": {
+          "branch": "spm",
+          "revision": "af195e845c7812d55ac8cb71bcf31ac1d15af30f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
