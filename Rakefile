@@ -21,3 +21,7 @@ task :install_xctemplate do
   puts "Happy coding!"
   puts "Ahh, you may find the template in iOS section. So, please bear with us! 😇"
 end
+
+task :xcproj do
+  puts `swift package generate-xcodeproj --output SPMGenerated.xcodeproj`
+end

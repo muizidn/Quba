@@ -6,11 +6,13 @@
 //
 
 import AppKit
+import RxSwift
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
-    var controller: NSViewController!
-    
+    var coordinator: BaseCoordinator<Void>!
+    let disposeBag = DisposeBag()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 100, height: 100),
@@ -22,14 +24,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             ],
             backing: .buffered,
             defer: false)
-        
-        controller = EditorController()
-        window.contentView = controller.view
-        window.center()
-        NSApp.activate(ignoringOtherApps: true)
-        window.makeKeyAndOrderFront(NSApp)
+
+        coordinator = EditorCoordinator(window: window)
+        coordinator.start()
+            .subscribe()
+            .disposed(by: disposeBag)
+
     }
-    
+
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

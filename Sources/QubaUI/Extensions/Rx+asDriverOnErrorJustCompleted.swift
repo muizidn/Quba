@@ -10,7 +10,7 @@ import RxCocoa
 
 extension ObservableType {
     func asDriverOnErrorJustComplete() -> Driver<Element> {
-        return asDriver { error in
+        return asDriver { _ in
             return Driver.empty()
         }
     }

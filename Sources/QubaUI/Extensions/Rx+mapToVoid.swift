@@ -16,7 +16,7 @@ extension ObservableConvertibleType {
 }
 
 extension SharedSequenceConvertibleType {
-    func mapToVoid() -> SharedSequence<SharingStrategy,Void> {
+    func mapToVoid() -> SharedSequence<SharingStrategy, Void> {
         return asSharedSequence().map({ _ in })
     }
 }

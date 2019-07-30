@@ -1,38 +1,45 @@
-//  
+//
 //  EditorController.swift
 //  QubaUI
 //
 //  Created by PondokIOS on 27/07/19.
 //
 
-import Foundation
+import AppKit
 import ViewDSL
 import TinyConstraints
 import RxSwift
 import RxCocoa
 
 final class EditorController: Controller {
-    private let viewModel = EditorViewModel()
+    var viewModel: EditorViewModel!
     private let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutUI()
         startBind()
     }
-    
+
     // MARK: UI
-    
+
     private func layoutUI() {
-        view.add { (v: ScrollableTextView<TextView>) in
+        view.add { (v: ScrollableTextView<CodeEditorTextView>) in
             v.edgesToSuperview()
-            
-            v.textView.rx.string
-                .throttle(
-                    RxTimeInterval.milliseconds(3000),
-                    scheduler: MainScheduler.instance)
+
+            let textChanged = v.textView.rx.string
+//                .throttle(
+//                    RxTimeInterval.milliseconds(3000),
+//                    scheduler: MainScheduler.instance)
                 .asDriverOnErrorJustComplete()
+            textChanged
                 .drive(self.viewModel.input.editorString)
+                .disposed(by: self.disposeBag)
+
+            v.textView.rx.event
+                .debug("Event", trimOutput: false)
+                .filter({ $0.type == .keyDown })
+                .bind(to: self.viewModel.input.keyDownEvent)
                 .disposed(by: self.disposeBag)
         }
     }

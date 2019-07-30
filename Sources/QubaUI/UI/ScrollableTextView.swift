@@ -17,19 +17,19 @@ final class ScrollableTextView<T: TextView>: View {
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = true
         scrollView.autoresizingMask = [.width, .height]
-        
+
         textView.minSize = CGSize(width: 0, height: 0)
         textView.maxSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        
+
         scrollView.documentView = textView
         enableTextWrap()
         addSubview(scrollView)
     }
-    
+
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     var isTextWrapEnabled = true {
         didSet {
             if isTextWrapEnabled {
@@ -39,7 +39,7 @@ final class ScrollableTextView<T: TextView>: View {
             }
         }
     }
-    
+
     private func enableTextWrap() {
         textView.enclosingScrollView?.hasHorizontalScroller = false
         textView.isVerticallyResizable = true
@@ -48,7 +48,7 @@ final class ScrollableTextView<T: TextView>: View {
         textView.autoresizingMask = [.width]
         textView.textContainer?.widthTracksTextView = true
     }
-    
+
     // FIXME: This one breaks!
     private func disableTextWrap() {
         textView.enclosingScrollView?.hasHorizontalScroller = true

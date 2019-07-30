@@ -13,6 +13,8 @@ typealias View = MacView
 
 typealias ScrollView = NSScrollView
 typealias RulerView = NSRulerView
+typealias StackView = NSStackView
+typealias Button = NSButton
 
 typealias TextView = NSTextView
 
